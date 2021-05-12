@@ -10,6 +10,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.9",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "prisma": "^2.20.1",
