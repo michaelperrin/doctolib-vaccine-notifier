@@ -2,7 +2,7 @@
 
 ## How to run
 
-Copy `.env.dist` to `.env` and edit parameters for Twilio.
+Copy `.env.dist` to `.env` and edit parameters.
 
 Run the following command:
 
