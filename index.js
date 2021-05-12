@@ -7,6 +7,5 @@ dotenv.config();
 const centerWithAvailability = await getCenterWithAvailability();
 
 if (centerWithAvailability !== null) {
-  console.log(centerWithAvailability.name);
   sendNotification(`Vaccin dispo à : ${centerWithAvailability.name}`);
 }

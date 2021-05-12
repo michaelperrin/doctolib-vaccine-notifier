@@ -4,7 +4,9 @@ import fetch from 'node-fetch';
 const getURL = (id) => `https://www.doctolib.fr/search_results/${id}.json?ref_visit_motive_ids%5B%5D=6970&ref_visit_motive_ids%5B%5D=7005&speciality_id=5494&search_result_format=json&force_max_limit=2`;
 
 const getCenterIds = async () => {
-  const html = await fetch('https://www.doctolib.fr/vaccination-covid-19/bordeaux?ref_visit_motive_ids[]=6970&ref_visit_motive_ids[]=7005&force_max_limit=2')
+  const { BASE_VACCINE_CENTERS_URL } = process.env;
+
+  const html = await fetch(BASE_VACCINE_CENTERS_URL)
     .then(response => response.text());
   const dom = cheerio.load(html);
 
@@ -28,7 +30,7 @@ const getCenterWithAvailability = async () => {
     const data = await fetch(getURL(id))
       .then(res => res.json());
 
-    if (data.total !== 1) {
+    if (data.total !== 0) {
       return {
         name: data.search_result.last_name,
       }
