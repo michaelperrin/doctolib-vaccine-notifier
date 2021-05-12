@@ -1,21 +1,26 @@
-import twilio from 'twilio';
+// import twilio from 'twilio';
+// import * as mailjet from 'node-mailjet';
+import mailjet from 'node-mailjet';
 
 const sendNotification = (message) => {
-  const {
-    TWILIO_ACCOUNT_SID,
-    TWILIO_AUTH_TOKEN,
-    PHONE_NUMBER_FROM,
-    PHONE_NUMBER_TO,
-  } = process.env;
+  const { MAILJET_SMS_TOKEN, PHONE_NUMBER_TO } = process.env;
 
-  const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+  const mailjetClient = mailjet
+    .connect(MAILJET_SMS_TOKEN);
 
-  client.messages
-    .create({
-      body: message,
-      from: PHONE_NUMBER_FROM,
-      to: PHONE_NUMBER_TO,
-    });
+  const request = mailjetClient
+    .post("sms-send", { 'version': 'v4' })
+    .request({
+      "Text": message,
+      "To": PHONE_NUMBER_TO,
+      "From": "MJPilot"
+    })
+
+  request
+    .then((result) => { })
+    .catch((err) => {
+      console.log(err.statusCode)
+    })
 }
 
 export default sendNotification;
