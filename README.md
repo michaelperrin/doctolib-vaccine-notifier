@@ -1,4 +1,4 @@
-# CVS Vaccine notifier
+# Doctolib Vaccine notifier
 
 ## How to run
 
